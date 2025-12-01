@@ -8,10 +8,6 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Photoswipe CSS + JS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.min.js"></script>
-
   <!-- Our custom colors + badge killer in one block -->
   <script>
     tailwind.config = {
@@ -36,7 +32,7 @@
       <h1 class="text-2xl font-bold">McBride Family Poodles</h1>
       <div class="space-x-8 hidden md:block">
         <a href="index.html" class="hover:text-burgundy transition">Home</a>
-        <a href="puppies.html" class="text-burgundy font-bold transition">Puppies</a> <!-- bold = shows current page -->
+        <a href="puppies.html" class="text-burgundy font-bold">Puppies</a> <!-- bold = shows current page -->
         <a href="parents.html" class="text-burgundy transition">Our Dogs</a>
         <a href="about.html" class="hover:text-burgundy transition">About</a>
         <a href="blog.html" class="hover:text-burgundy transition">Blog</a>
@@ -162,7 +158,7 @@
       </div>
 
       
-      <!-- SIRIUS -->
+    <!-- SIRIUS -->
       <div class="group cursor-pointer" onclick="openLightbox('20251125_sirius')">
         <div class="bg-gray-900 rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-burgundy/20">
           <picture>
@@ -195,7 +191,7 @@
           </div>
         </div>
       </div>
-    </div>
+
   </section>
 
 <!-- LIGHTBOX -->
@@ -213,101 +209,72 @@
 </div>
 
 <script>
-  // Close lightbox when clicking background
-  function closeLightbox(e) {
-    if (e.target === document.getElementById('lightbox')) {
-      document.getElementById('lightbox').classList.add('hidden');
-      document.documentElement.style.overflow = '';
-    }
+// Close when clicking backdrop
+function closeLightbox(e) {
+  if (e.target.id === 'lightbox') {
+    lightbox.classList.add('hidden');
+    document.documentElement.style.overflow = '';
   }
+}
 
-  // ALL GALLERIES — each puppy now has its own folder + files
-  const galleries = {
-    pepper: {
-      folder: "20250731_froggie_arsibalt",
-      files: [
-        "20251121_Pepper_01.webp", "20251121_Pepper_02.webp", "20251121_Pepper_03.webp",
-        "20251121_Pepper_04.webp", "20251121_Pepper_05.webp"
-      ]
-    },
-    severus: {
-      folder: "20250731_froggie_arsibalt",
-      files: [
-        "20251121_Severus_01.webp", "20251121_Severus_02.webp",
-        "20251121_Severus_03.webp", "20251121_Severus_04.webp"
-      ]
-    },
-    "20251124_luna": {
-      folder: "20250731_froggie_arsibalt",
-      files: [
-        "20251124_luna_01.webp", "20251124_luna_02.webp", "20251124_luna_03.webp",
-        "20251124_luna_04.webp", "20251124_luna_05.webp", "20251124_luna_06.webp"
-      ]
-    },
-    "20251124_junebug": {
-      folder: "20250731_froggie_arsibalt",
-      files: [
-        "20251124_junebug_01.webp", "20251124_junebug_02.webp", "20251124_junebug_03.webp", 
-        "20251124_junebug_04.webp"
-      ]
-    },
-    "20251125_bowie": {
-      folder: "20250731_froggie_arsibalt",
-      files: [
-        "20251125_bowie_01.webp", "20251125_bowie_02.webp", "20251125_bowie_03.webp", 
-        "20251125_bowie_04.webp", "20251125_bowie_05.webp", "20251125_bowie_06.webp"
-      ]
-    },
-    "20251124_merlin": {
-      folder: "20250627_quinn_bluey",
-      files: [
-        "20251124_merlin_01.webp", "20251124_merlin_02.webp", "20251124_merlin_03.webp",
-        "20251124_merlin_04.webp", "20251124_merlin_05.webp"
-        
-      ]
-    },
-    "20251125_sirius": {
-      folder: "20250627_quinn_bluey",
-      files: [
-        "20251125_sirius_01.webp", "20251125_sirius_02.webp", "20251125_sirius_03.webp",
-        "20251125_sirius_04.webp", "20251125_sirius_05.webp", "20251125_sirius_06.webp",
-        
-      ]
-    }
-    // Add more puppies anytime — just copy one of these blocks!
-  };
+const lightbox = document.getElementById('lightbox');
+const lightboxContent = document.getElementById('lightbox-content');
 
-  function openLightbox(puppy) {
-    const baseFolder = "assets/images/puppies/";
-    const gallery = galleries[puppy];
-    if (!gallery) return; // safety
+// ALL GALLERIES — same as before
+const galleries = {
+  pepper: { folder: "20250731_froggie_arsibalt", files: ["20251121_Pepper_01.webp","20251121_Pepper_02.webp","20251121_Pepper_03.webp","20251121_Pepper_04.webp","20251121_Pepper_05.webp"] },
+  severus: { folder: "20250731_froggie_arsibalt", files: ["20251121_Severus_01.webp","20251121_Severus_02.webp","20251121_Severus_03.webp","20251121_Severus_04.webp"] },
+  "20251124_luna": { folder: "20250731_froggie_arsibalt", files: ["20251124_luna_01.webp","20251124_luna_02.webp","20251124_luna_03.webp","20251124_luna_04.webp","20251124_luna_05.webp","20251124_luna_06.webp"] },
+  "20251124_junebug": { folder: "20250731_froggie_arsibalt", files: ["20251124_junebug_01.webp","20251124_junebug_02.webp","20251124_junebug_03.webp","20251124_junebug_04.webp"] },
+  "20251125_bowie": { folder: "20250731_froggie_arsibalt", files: ["20251125_bowie_01.webp","20251125_bowie_02.webp","20251125_bowie_03.webp","20251125_bowie_04.webp","20251125_bowie_05.webp","20251125_bowie_06.webp"] },
+  "20251124_merlin": { folder: "20250627_quinn_bluey", files: ["20251124_merlin_01.webp","20251124_merlin_02.webp","20251124_merlin_03.webp","20251124_merlin_04.webp","20251124_merlin_05.webp"] },
+  "20251125_sirius": { folder: "20250627_quinn_bluey", files: ["20251125_sirius_01.webp","20251125_sirius_02.webp","20251125_sirius_03.webp","20251125_sirius_04.webp","20251125_sirius_05.webp","20251125_sirius_06.webp"] }
+};
 
-    const folderPath = baseFolder + gallery.folder + "/";
-    const content = document.getElementById('lightbox-content');
+function openLightbox(puppy) {
+  const gallery = galleries[puppy];
+  if (!gallery) return;
 
-    content.innerHTML = gallery.files.map(file => `
-      <div class="relative overflow-hidden rounded-xl shadow-2xl cursor-zoom-in">
-        <picture>
-          <source srcset="${folderPath}${file}" type="image/webp">
-          <img src="${folderPath}${file.replace('.webp', '.jpg')}"
-               class="w-full object-contain max-w-full transition-transform duration-300"
-               loading="lazy"
-               onclick="event.stopPropagation(); this.style.transform = this.style.transform === 'scale(2.5)' ? 'scale(1)' : 'scale(2.5)'">
-        </picture>
-      </div>
-    `).join('');
+  const base = `assets/images/puppies/${gallery.folder}/`;
+  lightboxContent.innerHTML = gallery.files.map(file => `
+    <div class="relative overflow-hidden rounded-xl shadow-2xl">
+      <img src="${base}${file}"
+           class="w-full max-w-full object-contain cursor-zoom-in select-none"
+           loading="lazy"
+           style="touch-action: pan-x pan-y pinch-zoom;">
+    </div>
+  `).join('');
 
-    document.getElementById('lightbox').classList.remove('hidden');
-    document.documentElement.style.overflow = 'hidden';
+  lightbox.classList.remove('hidden');
+  document.documentElement.style.overflow = 'hidden';
+}
+
+// REAL SMOOTH ZOOM + PAN — works on mobile & desktop
+lightboxContent.addEventListener('wheel', e => {
+  e.preventDefault();
+  const img = e.target.closest('img');
+  if (!img) return;
+  const scale = img.style.transform ? parseFloat(img.style.transform.replace('scale(', '')) || 1 : 1;
+  img.style.transform = `scale(${scale + (e.deltaY > 0 ? -0.3 : 0.3)})`;
+  img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
+});
+
+// Double-click / double-tap zoom
+lightboxContent.addEventListener('dblclick', e => {
+  const img = e.target.closest('img');
+  if (!img) return;
+  const current = img.style.transform ? parseFloat(img.style.transform.replace('scale(', '')) || 1 : 1;
+  img.style.transform = current > 1 ? 'scale(1)' : 'scale(3)';
+  img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
+});
+
+// Close with Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    lightbox.classList.add('hidden');
+    document.documentElement.style.overflow = '';
   }
-
-  // Close with Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      document.getElementById('lightbox').classList.add('hidden');
-      document.documentElement.style.overflow = '';
-    }
-  });
+});
 </script>
 </body>
 </html>
