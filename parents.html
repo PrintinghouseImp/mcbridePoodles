@@ -291,34 +291,6 @@ function openLightbox(dog) {
   document.documentElement.style.overflow = 'hidden';
 }
 
-// REAL SMOOTH ZOOM + PAN (mouse wheel & pinch)
-lightboxContent.addEventListener('wheel', e => {
-  e.preventDefault();
-  const img = e.target.closest('img');
-  if (!img) return;
-
-  const current = img.dataset.scale ? parseFloat(img.dataset.scale) : 1;
-  const delta = e.deltaY > 0 ? -0.3 : 0.3;
-  let newScale = Math.max(0.5, Math.min(8, current + delta));
-
-  img.dataset.scale = newScale;
-  img.style.transform = `scale(${newScale})`;
-  img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
-});
-
-// Double-click / double-tap to zoom in/out
-lightboxContent.addEventListener('dblclick', e => {
-  const img = e.target.closest('img');
-  if (!img) return;
-
-  const current = img.dataset.scale ? parseFloat(img.dataset.scale) : 1;
-  const newScale = current > 1.5 ? 1 : 3;
-
-  img.dataset.scale = newScale;
-  img.style.transform = `scale(${newScale})`;
-  img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
-});
-
 // Close with Escape
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {

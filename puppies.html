@@ -251,25 +251,6 @@ function openLightbox(puppy) {
   document.documentElement.style.overflow = 'hidden';
 }
 
-// REAL SMOOTH ZOOM + PAN
-lightboxContent.addEventListener('wheel', e => {
-  e.preventDefault();
-  const img = e.target.closest('img');
-  if (!img) return;
-  const scale = img.style.transform ? parseFloat(img.style.transform.replace('scale(', '')) || 1 : 1;
-  img.style.transform = `scale(${scale + (e.deltaY > 0 ? -0.3 : 0.3)})`;
-  img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
-});
-
-// Double-click / double-tap zoom
-lightboxContent.addEventListener('dblclick', e => {
-  const img = e.target.closest('img');
-  if (!img) return;
-  const current = img.style.transform ? parseFloat(img.style.transform.replace('scale(', '')) || 1 : 1;
-  img.style.transform = current > 1 ? 'scale(1)' : 'scale(3)';
-  img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
-});
-
 function closeLightbox(e) {
   // Close if clicking backdrop OR the × button
   if (e.target.id === 'lightbox' || e.target.tagName === 'BUTTON') {
